@@ -140,4 +140,4 @@ The invoicing system enables:
 
 ## Credits
 
-Developed by Logixx LLC
+Developed by Shawn Mullaney for Logixx LLC
