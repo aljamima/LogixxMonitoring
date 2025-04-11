@@ -43,6 +43,7 @@ client_secret.json*
 *.pem
 *.key
 *.cert
+passwords.txt
 
 # Media and user uploads
 media/
