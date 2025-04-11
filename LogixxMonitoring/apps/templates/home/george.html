@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logixx Monitoring | Dashboard</title>
+
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="/static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/dist/css/adminlte.css">
+
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> 
+
+
+</head>
+
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" width="100%">
+  <div class="wrapper" width="100%">
+
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__wobble" src="/static/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-dark">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="index" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link">Contact</a>
+        </li>
+      </ul>
+
+
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="index" class="brand-link">
+        <img src="/static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+          style="opacity: .8">
+        <span class="brand-text font-weight-light">Logixx Monitoring</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="/static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">{{ current_user.username }}</a>
+          </div>
+        </div>
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+          <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-sidebar">
+                <i class="fas fa-search fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-item menu-close">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Sites
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="george" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>George</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="quincy" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Quincy</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="electriccity" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Electric City</p>
+                  </a>
+                </li>
+              </ul>
+
+            </li>
+          </ul> 
+
+          <ul class="nav nav-pills nav-sidebar flex-column collapse show">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a style="background-color: #17a2b8;" href="rebooter" class="nav-link active">
+                <i style="ionicon-stroke-width: 64px;" class="nav-icon fas ion-power"></i>
+                <p>
+                  Remote Rebooter
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item menu-open">
+              <a style="background-color: #8a59ec;" href="invoice" class="nav-link active">
+                <i style="ionicon-stroke-width: 64px;" class="nav-icon fas ion-power"></i>
+                <p>
+                  Invoices
+                </p>
+              </a>
+            </li>
+        
+          </ul> 
+        </nav>
+ <!-- /.sidebar-menu -->
+
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+    <!-- END OF SIDEBAR CHITS -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" width="100%">
+      <!-- Content Header (Page header) -->
+      <div class="content-header" width="100%">
+        <div class="container-fluid" width="100%">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Logixx Monitoring -- {{ site_name }}</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="index">Home</a></li>
+                <li class="breadcrumb-item active">Logixx Monitoring</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <section class="content" width="100%">
+        <div class="container-fluid" width="100%">
+
+          <!-- Info boxes -->
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="ion ion-stats-bars"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Hashrate</span>
+                  <span class="info-box-number">
+                    {{ total_hashrate }}
+                    <small>{{ hash_unit }}</small>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Online</span>
+                  <span class="info-box-number">{{ on_off}}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="ion ion-flame"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Temp Average</span>
+                  <span class="info-box-number">{{ temp_av }}&#176;</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="ion ion-pie-graph"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Cards</span>
+                  <span class="info-box-number">{{ card_count }}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- END OF INFO BOXES -->
+          <!-- /.row -->
+
+          <!-- /.row -->
+
+          <!-- Main row -->
+          <div class="row" width="100%">
+            <!-- Left col -->
+
+
+
+
+            <div class="card-body p-0" width="100%">
+              <div class="table-responsive" width="100%">
+                <table style="display:inline-table;" id="data" class="table-responsive table table-hover hover"
+                  width="100%">
+                  <thead>
+
+                    <!--  table table-hover dataTable display compact hover order-column row-borders -->
+
+                    <tr width="100%">
+                      <th>Miner IP</th>
+                      <th>Miner MAC</th>
+                      <th>Miner Type</th>
+                      <th>Site</th>
+                      <th>Num Of Cards</th>
+                      <th>Rack Location</th>
+                      <th>Uptime</th>
+                      <th>Hashrate</th>
+                      <th>Av Temp</th>
+                      <th>Max Temp</th>
+                      <th>Status</th>
+                      <th>Last Updated</th>
+                      <th>Comments</th>
+                      <th>Reboot</th>
+                    </tr>
+                  </thead>
+
+
+
+                  <tbody width="100%">
+                    {% for row in users %}
+                    <tr width="100%">
+                      <td>{{row[1]}}</td>
+                      <td>{{row[2]}}</td>
+                      <td>{{row[3]}}</td>
+                      <td>{{row[4]}}</td>
+                      <td>{{row[5]}}</td>
+                      <td>{{row[6]}}</td>
+                      <td>{{row[7]}}</td>
+                      <td>{{row[10]}}</td>
+                      <td>{{row[11]}}</td>
+                      <td>{{row[12]}}</td>
+                      <td>{{row[13]}}</td>
+                      <td>{{row[14]}}</td>
+                      <td>{{row[15]}}</td>
+                      <td><input type="button" id="test" onclick="confirm('Rebooting miner {{row[1]}} At {{row[4]}}');location.href='http://192.168.222.10:5000/rebootAPI?miner={{row[1]}}&site={{row[4]}}&url='+location.href;" value="Restart"></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div> <!-- /ROW -->
+
+          </div><!-- /CONTAINER FLUID -->
+
+
+
+
+        </div>
+    </div> <!-- /.col -->
+
+    <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2022 <a href="https://logixx.com">Logixx</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0
+    </div>
+  </footer>
+  </div>
+  <!-- ./wrapper -->
+  </div>
+</body>
+<!-- REQUIRED SCRIPTS -->
+
+
+<!-- jQuery -->
+<script src="/static/plugins/jquery/jquery.min.js"></script>
+
+
+
+
+<!-- Bootstrap -->
+<script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="/static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="/static/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="/static/plugins/raphael/raphael.min.js"></script>
+<script src="/static/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="/static/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="/static/plugins/chart.js/Chart.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="/static/dist/js/pages/dashboard2.js"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+
+
+<script>
+  jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+    "ip-address-pre": function (a) {
+      var i, item;
+      var m, n, t, p;
+      var x, xa;
+      if (!a) {
+        return '000000000000';
+      }
+      a = a.replace(/<[\s\S]*?>/g, "");
+      //IPv4:Port
+      t = a.split(":");
+      if (t.length == 2) {
+        m = t[0].split(".");
+        p = t[1];
+      }
+      else {
+        m = a.split(".");
+      }
+      n = a.split(":");
+      x = "";
+      xa = "";
+      if (m.length == 4) {
+        // IPV4
+        for (i = 0; i < m.length; i++) {
+          item = m[i];
+          x += "000".substr(item.length) + item;
+        }
+        if (p) {
+          x += ":" + "00000".substr(p.length) + p;
+        }
+      }
+      else if (n.length > 0) {
+        // IPV6
+        var count = 0;
+        for (i = 0; i < n.length; i++) {
+          item = n[i];
+
+          if (i > 0) {
+            xa += ":";
+          }
+
+          if (item.length === 0) {
+            count += 0;
+          }
+          else {
+            xa += "0000".substr(item.length) + item;
+            count += 4;
+          }
+        }
+        // Padding the ::
+        n = xa.split(":");
+        var paddDone = 0;
+        for (i = 0; i < n.length; i++) {
+          item = n[i];
+          if (item.length === 0 && paddDone === 0) {
+            for (var padding = 0; padding < (32 - count); padding++) {
+              x += "0";
+              paddDone = 1;
+            }
+          }
+          else {
+            x += item;
+          }
+        }
+      }
+      return x;
+    },
+    "ip-address-asc": function (a, b) {
+      return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    },
+    "ip-address-desc": function (a, b) {
+      return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    }
+  });
+</script>
+
+<!-- 
+this is gonna let me hide columns rather than only fetching some columns, i can grab all data and let user see what they want
+  {
+      "targets": [ 2 ],
+      "visible": false,
+      "searchable": false
+  },
+  {
+      "targets": [ 3 ],
+      "visible": false
+  }
+
+-->
+
+
+<script>
+
+  $(document).ready(function () {
+    $('#data').DataTable({
+      'paging': false,
+      'lengthChange': true,
+      'searching': false,
+      'columnDefs': [{ type: 'ip-address', targets: 0 }],
+      'ordering': true,
+      'info': true,
+      'autoWidth': true,
+      'stateSave': true,
+      'scrollX': false,
+      'autoWidth': true
+
+
+    })
+  });
+
+</script>
+
+
+
+</html>
